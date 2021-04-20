@@ -1,0 +1,70 @@
+<!-- vue 是一个js框架。 是在 javascript基础之上 封装的一个框架
+django是一个python框架，是在Python的基础之上封装的一个框架 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- 第一步 ，导入vue.js -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- 第二步 接管html元素 -->
+	<div id='app'>
+		<!-- 以后的HTML代码都写在div里面  {{}}为小胡子语法渲染 -->
+		{{msg}}  
+		<!-- v-bind：用来修改标签的属性的值 简写形式直接：href     标签内的数据可以通过{{}}来渲染 -->
+		<a v-bind:href="next">{{login}}</a>  
+
+		<hr>
+		<a href="#" v-if='islogin'>个人中心</a>
+		<a href="#" v-else>登录</a>
+		
+		<span v-if='level === 10'>青铜</span>
+		<span v-else-if='level === 20'>白银</span>
+		<span v-else-if='level === 30'>黄金</span>
+		<span v-else-if='level === 40'>白金</span>
+		<span v-else>钻石</span>
+		
+		<hr>
+
+		<!-- v-show用法和v-if大致一样，但是v-show它不支持v-else,
+        它和v-if的区别是，它制作元素样式的显示和隐藏，元素一直是存在的
+         -->
+         <span v-if='seen'>if</span>
+         <br>
+         <span v-show='seen'>show</span>
+
+         <hr>
+        <!-- for 循环   v-for="item in items"   v-for="占位变量 in data中的变量名"  -->
+	    <!-- for 循环  使用索引  v-for="(item,index) in items" -->
+         <ul>
+         	<li v-for='(item,index) in items'><a href="#">{{index+1}}--{{item}}</a></li>
+         </ul>
+         <hr>
+
+         <ul>
+         	<li v-for='item in categories' :key='item.link'>{{item.id}}--{{item.link}}--{{item.name}}</li>
+         </ul>
+
+
+	</div>
+</body>
+<!-- 第三步 创建vue实例对象 一定要添加scrip -->
+<script type="text/javascript">
+	var app = new Vue({       // var 是关键字变量的声明    new关键字   Vue()创建实例化对象
+		el: '#app' ,          // el固定写法   表示element元素，获取HTML中标签id为app的元素
+		data: {		          // data固定写法 表示变量数据
+			msg: 'hello world',
+			login: '登录',
+			next: 'http://www.itheima.com',
+			islogin: true,
+			level: 30,
+			seen: false,
+			items:['首页','热门','动态','频道'],
+			categories: [{'id':1,'link':'http://www.baidu.com','name':'首页'},{'id':2,'link':'http://www.itheima.com','name':'末页'}],
+		}
+	})
+
+</script>
+</html>
